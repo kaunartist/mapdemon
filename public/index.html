@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Map Demon</title>
+    <link rel="shortcut icon" href="favicon.png?v=1" />
+    <!-- Matomo -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//www.mapdemon.com/analytics/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <!-- End Matomo Code -->
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+    <div class="app-container" id="root"></div>
+    <div class="about">
+      <div class="intro">
+        <!-- Begin MailChimp Signup Form -->
+        <div id="mc_embed_signup">
+          <form action="https://mapdemon.us18.list-manage.com/subscribe/post?u=68219c04469cdd6d41e848fea&amp;id=cd439a1ed5" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                <div id="mc_embed_signup_scroll">
+                    <h2>Subscribe to our mailing list</h2>
+                    <div class="mc-field-group">
+                        <label for="mce-EMAIL">Email Address:</label>
+                          <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+                    </div>
+                      <div id="mce-responses" class="clear">
+                            <div class="response" id="mce-error-response" style="display:none"></div>
+                                <div class="response" id="mce-success-response" style="display:none"></div>
+                                  </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                      <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_68219c04469cdd6d41e848fea_cd439a1ed5" tabindex="-1" value=""></div>
+                                          <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+                                              </div>
+          </form>
+        </div>
+
+        <!--End mc_embed_signup-->
+        <!--<p><a href="#" onclick="exportSVG(); return false;">Download SVG</a></p>-->
+      </div>
+    </div>
+    <div id="tool-params">
+      <div id="tool-params-mountain-stamp" class="tool-params">
+        <div class="tool-parameter">
+          <label>Summit height</label><input type="text" id="mountain-stamp-summit-height" name="summit-height" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Left slope width</label><input type="text" id="mountain-stamp-left-slope-width" name="left-slope-width" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Left slope curve</label><input type="text" id="mountain-stamp-left-slope-curve" name="left-slope-curve" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Summit width</label><input type="text" id="mountain-stamp-peak-width" name="peak-width" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Right slope width</label><input type="text" id="mountain-stamp-right-slope-width" name="right-slope-width" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Right slope curve</label><input type="text" id="mountain-stamp-right-slope-curve" name="right-slope-curve" value="" />
+        </div>
+      </div>
+      <div id="tool-params-mountain-brush" class="tool-params">
+        <h3>Mountain Brush</h3>
+        <div class="usage"><p>Click and drag to draw groups of mountains.</p></div>
+        <div class="tool-preset">
+          <label>Hills</label><button type="button" id="mountain-brush-preset-hills" name="preset-hills" value="hills">Hills</button>
+          <label>Steppe</label><button type="button" id="mountain-brush-preset-steppe" name="preset-steppe" value="steppe">Steppe</button>
+          <label>Alps</label><button type="button" id="mountain-brush-preset-alps" name="preset-alps" value="alps">Alps</button>
+        </div>
+        <div class="tool-parameter">
+          <label>Tick rate</label><input type="text" id="mountain-brush-tick-rate" name="tick-rate" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Summit height</label><input type="text" id="mountain-brush-summit-height" name="summit-height" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Left slope width</label><input type="text" id="mountain-brush-left-slope-width" name="left-slope-width" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Left slope curve</label><input type="text" id="mountain-brush-left-slope-curve" name="left-slope-curve" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Summit width</label><input type="text" id="mountain-brush-peak-width" name="peak-width" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Right slope width</label><input type="text" id="mountain-brush-right-slope-width" name="right-slope-width" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Right slope curve</label><input type="text" id="mountain-brush-right-slope-curve" name="right-slope-curve" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Number of mountains</label><input type="text" id="mountain-brush-number-mountains" name="number-mountains" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Scaling</label><input type="text" id="mountain-brush-scaling" name="scaling" value="" />
+        </div>
+      </div>
+
+      <div id="tool-params-forest-brush" class="tool-params">
+        <h3>Forest Brush</h3>
+        <div class="usage"><p>Click to draw a single tree.</p><p>Drag to draw an area to fill with trees.</p></div>
+        <div class="tool-preset">
+          <label>Coniferous</label><button type="button" id="forest-brush-preset-coniferous" name="preset-coniferous" value="coniferous">Coniferous</button>
+          <label>Deciduous</label><button type="button" id="forest-brush-preset-deciduous" name="preset-deciduous" value="deciduous">Deciduous</button>
+          <label>Mix</label><button type="button" id="forest-brush-preset-mix" name="preset-mix" value="mix">Mix</button>
+        </div>
+        <div class="tool-parameter">
+          <label>Tick rate</label><input type="text" id="forest-brush-tick-rate" name="tick-rate" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Trunk height</label><input type="text" id="forest-brush-trunk-height" name="trunk-height" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Trunk width</label><input type="text" id="forest-brush-trunk-width" name="trunk-width" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Tree type</label><br/>
+          <select name="crown-shape" id="forest-brush-crown-shape">
+            <option value="deciduous">Deciduous</option>
+            <option value="coniferous">Coniferous</option>
+          </select>
+        </div>
+        <div class="tool-parameter">
+          <label>Crown height</label><input type="text" id="forest-brush-crown-height" name="crown-height" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Crown width</label><input type="text" id="forest-brush-crown-width" name="crown-width" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Number of trees</label><input type="text" id="forest-brush-number-trees" name="number-trees" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Size variation of trees</label><input type="text" id="forest-brush-scaling" name="scaling" value="" />
+        </div>
+      </div>
+
+      <div id="tool-params-river-brush" class="tool-params">
+        <h3>River Brush</h3>
+        <div class="usage"><p>Click and drag to draw a river or lake.</p></div>
+        <div class="tool-parameter">
+          <label>Tick rate</label><input type="text" id="river-brush-tick-rate" name="tick-rate" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Width</label><input type="text" id="river-brush-width" name="width" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>River Style</label><br/>
+          <select name="river-style" id="river-brush-river-style">
+            <option value="line">Line</option>
+            <option value="lake">Lake</option>
+            <option value="variable-width">Variable Width</option>
+          </select>
+        </div>
+        <div class="tool-parameter">
+          <label>Smoothing Method</label><br/>
+          <select name="smoothing-method" id="river-brush-smoothing-method">
+            <option value="geometric">Geometric</option>
+            <option value="continuous" selected>Continuous</option>
+            <option value="asymmetric">Asymmetric</option>
+            <option value="catmull-rom">Catmull-Rom</option>
+          </select>
+        </div>
+        <div class="tool-parameter">
+          <label>Smoothing Factor</label><input type="text" id="river-brush-smoothing-factor" name="smoothing-factor" value="" />
+        </div>
+      </div>
+      <div id="tool-params-road-brush" class="tool-params">
+        <h3>Road Brush</h3>
+        <div class="usage"><p>Click and drag to draw a dashed line.</p></div>
+        <div class="tool-parameter">
+          <label>Tick rate</label><input type="text" id="road-brush-tick-rate" name="tick-rate" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Width</label><input type="text" id="road-brush-width" name="width" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Dash Length</label><input type="text" id="road-brush-dash-length" name="dash-length" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Dash Gap</label><input type="text" id="road-brush-dash-gap" name="dash-gap" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Smoothing Method</label><br/>
+          <select name="smoothing-method" id="road-brush-smoothing-method">
+            <option value="geometric">Geometric</option>
+            <option value="continuous" selected>Continuous</option>
+            <option value="asymmetric">Asymmetric</option>
+            <option value="catmull-rom">Catmull-Rom</option>
+          </select>
+        </div>
+        <div class="tool-parameter">
+          <label>Smoothing Factor</label><input type="text" id="road-brush-smoothing-factor" name="smoothing-factor" value="" />
+        </div>
+      </div>
+      <div id="tool-params-coast-brush" class="tool-params">
+        <h3>Coast Brush</h3>
+        <div class="usage"><p>Click and drag to draw a coastline.</p></div>
+        <div class="tool-parameter">
+          <label>Tick rate</label><input type="text" id="coast-brush-tick-rate" name="tick-rate" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Width</label><input type="text" id="coast-brush-width" name="width" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Contours</label><input type="text" id="coast-brush-contours" name="contours" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Contour spacing</label><input type="text" id="coast-brush-contour-spacing" name="contour-spacing" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Smoothing Method</label><br/>
+          <select name="smoothing-method" id="coast-brush-smoothing-method">
+            <option value="geometric">Geometric</option>
+            <option value="continuous" selected>Continuous</option>
+            <option value="asymmetric">Asymmetric</option>
+            <option value="catmull-rom">Catmull-Rom</option>
+          </select>
+        </div>
+        <div class="tool-parameter">
+          <label>Smoothing Factor</label><input type="text" id="coast-brush-smoothing-factor" name="smoothing-factor" value="" />
+        </div>
+      </div>
+      <div id="tool-params-icon-stamp" class="tool-params">
+        <h3>Icon Stamp</h3>
+        <div class="usage"><p>Click to place the selected icon.</p></div>
+        <div class="tool-parameter">
+          <label>Scaling</label><input type="text" id="icon-stamp-scaling" name="scaling" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Icon</label>
+          <div id="icon-stamp-icon"></div>
+        </div>
+      </div>
+      <div id="tool-params-text-tool" class="tool-params">
+        <h3>Text Tool</h3>
+        <div class="usage"><p>Click to place labels. Click again or click Escape to stop typing.</p></div>
+        <div class="tool-parameter">
+          <label>Font size</label><input type="text" id="text-tool-font-size" name="font-size" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Font family</label><br/>
+          <select name="font-family" id="text-tool-font-family">
+            <option value="serif" selected>Serif</option>
+            <option value="sans-serif">Sans-serif</option>
+          </select>
+        </div>
+        <div class="tool-parameter">
+          <label>Leading</label><input type="text" id="text-tool-leading" name="leading" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Background style</label><br/>
+          <select name="background-style" id="text-tool-background-style">
+            <option value="none">None</option>
+            <option value="rectangle">Rectangle</option>
+            <option value="rectangle-border" selected>Rectangle with border</option>
+            <option value="ribbon">Ribbon</option>
+            <option value="ribbon-3d">Ribbon (3D)</option>
+          </select>
+        </div>
+      </div>
+      <div id="tool-params-move-tool" class="tool-params">
+        <h3>Move Tool</h3>
+        <div class="usage"><p>Click and drag to move elements around.</p></div>
+        <div class="tool-parameter" id="move-tool-filter">
+          <label>Only move selected:</label><br/><br/>
+          <label>Mountains</label><input type="checkbox" name="filter[]" value="mountain" /><br/>
+          <label>Forest</label><input type="checkbox" name="filter[]" value="tree" /><br/>
+          <label>Rivers</label><input type="checkbox" name="filter[]" value="river" /><br/>
+          <label>Roads</label><input type="checkbox" name="filter[]" value="road" /><br/>
+          <label>Coast</label><input type="checkbox" name="filter[]" value="coast" /><br/>
+          <label>Icons</label><input type="checkbox" name="filter[]" value="icon-instance" /><br/>
+          <label>Text</label><input type="checkbox" name="filter[]" value="label" /><br/>
+        </div>
+      </div>
+      <div id="tool-params-eraser-tool" class="tool-params">
+        <h3>Eraser Options</h3>
+        <div class="usage"><p>Click to remove drawn items.</p></div>
+        <div class="tool-parameter">
+          <label>Size</label><input type="text" id="eraser-tool-size" name="size" value="" />
+        </div>
+        <div class="tool-parameter" id="eraser-tool-filter">
+          <label>Only erase selected:</label><br/><br/>
+          <label>Mountains</label><input type="checkbox" name="filter[]" value="mountain" /><br/>
+          <label>Forest</label><input type="checkbox" name="filter[]" value="tree" /><br/>
+          <label>Rivers</label><input type="checkbox" name="filter[]" value="river" /><br/>
+          <label>Roads</label><input type="checkbox" name="filter[]" value="road" /><br/>
+          <label>Coast</label><input type="checkbox" name="filter[]" value="coast" /><br/>
+          <label>Icons</label><input type="checkbox" name="filter[]" value="icon-instance" /><br/>
+          <label>Text</label><input type="checkbox" name="filter[]" value="label" /><br/>
+        </div>
+        <div class="tool-parameter">
+          <label>Erase when</label><br/>
+          <select name="overlap" id="eraser-tool-overlap">
+            <option value="contain">Fully contained in eraser area</option>
+            <option value="overlap">Overlapping eraser area</option>
+          </select>
+        </div>
+      </div>
+      <div id="tool-params-zoom-tool" class="tool-params">
+        <h3>Zoom and Resize</h3>
+        <div class="usage"><p>Click to zoom in, shift-click to zoom out, ctrl-click to pan, edit params to resize map.</p></div>
+        <div class="tool-parameter">
+          <label>Zoom</label><input type="text" id="zoom-tool-zoom" name="zoom" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Width</label><input type="text" id="zoom-tool-width" name="width" value="" />
+        </div>
+        <div class="tool-parameter">
+          <label>Height</label><input type="text" id="zoom-tool-height" name="height" value="" />
+        </div>
+      </div>
+      <div id="tool-params-export-tool" class="tool-params">
+        <h3>Export to File</h3>
+        <div class="usage"><p>Work in progress: click to save as file. PNG working, laser cutter-ready SVG in progress.</p></div>
+        <div class="tool-parameter">
+          <label>File type</label><br/>
+          <select name="filetype" id="export-tool-filetype">
+            <option value="png">PNG</option>
+            <option value="svg">Laser-ready SVG</option>
+          </select>
+        </div>
+        <div class="tool-parameter">
+          <label>Width</label><input type="text" id="export-tool-width" name="width" value="1400" />
+        </div>
+        <div class="tool-parameter">
+          <label>Height</label><input type="text" id="export-tool-height" name="height" value="1200" />
+        </div>
+      </div>
+      <div id="tool-params-clear-canvas" class="tool-params">
+      </div>
+      <div id="tool-params-ribbon" class="toggle-button">
+      </div>
+    </div>
+  </body>
+  <script src="../dist/bundle.js"></script>
+</html>
+
