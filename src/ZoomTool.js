@@ -22,7 +22,7 @@ export class ZoomTool extends MapTool {
     };
 
     this.handleMouseDown = this.handleMouseDown.bind(this);
-    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.handleMouseDrag = this.handleMouseDrag.bind(this);
     this.handleMouseUp = this.handleMouseUp.bind(this);
   }
 
@@ -35,14 +35,14 @@ export class ZoomTool extends MapTool {
     let zoomTool = new paper.Tool();
     zoomTool.onKeyDown = this.handleKeyDown;
     zoomTool.onMouseDown = this.handleMouseDown;
-    zoomTool.onMouseMove = this.handleMouseMove;
+    zoomTool.onMouseDrag = this.handleMouseDrag;
     this.setState({'tool': zoomTool});
   }
 
   updateToolParameter(data) {
     super.updateToolParameter(data);
     if ("type" in data) {
-      if (data.currentTarget.name == "width" || data.currentTarget.name == "height") {
+      if (data.currentTarget.name === "width" || data.currentTarget.name === "height") {
         let params = this.state.params;
         this.props.changeMapSize(params['width'], params['height']);
         $("#zoom-tool-width").blur();
@@ -99,34 +99,46 @@ export class ZoomTool extends MapTool {
     let paper = this.props.paper;
     this.state.tool.activate();
     let zoom = params['zoom'];
-    //if (e.shiftKey) {
     if (e.modifiers.shift) {
       zoom = zoom - 0.1;
       if (zoom <= 0) {
         zoom = 0.1;
       }
     } else if (e.modifiers.control) {
-      zoom = zoom;
+      this.setState({
+        'brushOn': true,
+        'lastX': e.point.x,
+        'lastY': e.point.y
+      });
     } else {
       zoom = zoom + 0.1;
     }
 
-    this.setState({'brushOn': true, 'zoom': zoom});
 
     if (!e.modifiers.control) {
+      this.setState({'zoom': zoom});
       let slider = $('#zoom-tool-zoom').data('ionRangeSlider');
       slider.update({from: zoom});
       paper.view.zoom = zoom;
     }
   }
 
-  handleMouseMove(e) {
+  handleMouseDrag(e) {
 
     if (this.state.brushOn) {
       let paper = this.props.paper;
-      let dX = e.delta.x;//targetX - this.state.lastX;
-      let dY = e.delta.y;//targetY - this.state.lastY;
-      paper.view.scrollBy(new paper.Point(-dX/1.5, -dY/1.5));
+      // You would think we could use e.delta
+      // but for some reason, that is the difference between the current point
+      // and the last time *this specific event type* was fired
+      // EVEN IF THAT LAST TIME WAS PART OF A DIFFERENT DOWN-DRAG-UP SEQUENCE!!
+      // So, we maintain our own state of the last point
+      let dX = this.state.lastX - e.point.x;
+      let dY = this.state.lastY - e.point.y;
+      paper.view.translate(new paper.Point(-dX*0.5, -dY*0.5));
+      this.setState({
+        'lastX': e.point.x,
+        'lastY': e.point.y
+      });
     }
 
   }
@@ -135,25 +147,27 @@ export class ZoomTool extends MapTool {
 
     let params = this.state.params;
     let paper = this.props.paper;
-    paper.tools[0].activate();
-    this.setState({'brushOn': false});
+    paper.tools[0].activate(); // reset to the default tool
+    this.setState({
+      'brushOn': false,
+      'lastX': 0,
+      'lastY': 0
+    });
 
   }
 
   useTool(e) {
-
-    if (e.type == "mousedown") {
-      return this.handleMouseDown(e);
+    switch (e.type) {
+      case "mousedown":
+        return this.handleMouseDown(e);
+        break;
+      case "mousedrag":
+        return this.handleMouseDrag(e);
+        break;
+      case "mouseup":
+        return this.handleMouseUp(e);
+        break;
     }
-
-    if (e.type == "mousemove") {
-      return this.handleMouseMove(e);
-    }
-
-    if (e.type == "mouseup") {
-      return this.handleMouseUp(e);
-    }
-
   }
 
   render() {
