@@ -6,8 +6,7 @@ class MapDemonHeader extends Component {
     return (
       <div className="header">
         <h1>Map Demon: Overworld Map Creator</h1>
-        <h2>Beautiful maps, diabolically fast.</h2>
-        <h2>Currently in development.</h2>
+        <h2>Currently in sporadic development.</h2>
       </div>
     );
   }

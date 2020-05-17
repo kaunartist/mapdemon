@@ -164,15 +164,15 @@ export class CoastTool extends MapTool {
   }
 
   useTool(e) {
-    if (e.type == "mousedown") {
+    if (e.type === "mousedown") {
       return this.handleMouseDown(e);
     }
 
-    if (e.type == "mousemove") {
+    if (e.type === "mousemove") {
       return this.handleMouseMove(e);
     }
 
-    if (e.type == "mouseup") {
+    if (e.type === "mouseup") {
       return this.handleMouseUp(e);
     }
 
@@ -239,7 +239,7 @@ export class CoastTool extends MapTool {
           let nearest = lastContour.getNearestPoint(np);
           let distance = Math.round(nearest.getDistance(np));
           if (distance < gap || lastContour.contains(np)) {
-            if ((j+1) == (gap/3)) {
+            if ((j+1) === (gap/3)) {
               console.log("Wasn't able to fit it, skip");
             }
             // instead of continuing, can I try to move the point just a bit further out to have a better match of the overall shape?

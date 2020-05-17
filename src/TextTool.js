@@ -78,9 +78,9 @@ export class TextTool extends MapTool {
 
   handleKeyUp(e) {
     let text = this.state.currentItem;
-    if (e.key == "escape") {
+    if (e.key === "escape") {
       this.stopTyping();
-    } else if (e.key == "delete" || e.key == "backspace") {
+    } else if (e.key === "delete" || e.key === "backspace") {
       text.firstChild.content = text.firstChild.content.slice(0, -1);
       this.updateTextCursor(text);
     } else {
@@ -131,11 +131,11 @@ export class TextTool extends MapTool {
 
   useTool(e) {
 
-    if (e.type == "mouseup") {
+    if (e.type === "mouseup") {
       return this.handleMouseUp(e);
     }
 
-    if (e.type == "keyup") {
+    if (e.type === "keyup") {
       return this.handleKeyUp(e);
     }
 
@@ -146,7 +146,7 @@ export class TextTool extends MapTool {
     let params = this.state.params;
     let paper = this.props.paper;
 
-    let size = fontsize == null ? params['font-size'] : fontsize;
+    let size = fontsize === null ? params['font-size'] : fontsize;
     let text = new paper.PointText(new paper.Point(x, y));
     text.data.type = "label-text";
     text.content = contents;
@@ -177,11 +177,12 @@ export class TextTool extends MapTool {
       textBorder.remove();
       textBorder = null;
     }
-    var textBackground = params['background-style'];
-    if (text.firstChild.content != "") {
+    const textBackground = params['background-style'];
+    let b;
+    if (text.firstChild.content !== "") {
       switch (textBackground) {
         case "ribbon":
-          var b = text.bounds;
+          b = text.bounds;
           b.scale(1.2);
           var p = new paper.Path();
           p.add(new paper.Point(-14,0));
@@ -199,7 +200,7 @@ export class TextTool extends MapTool {
           p.sendToBack();
           break;
         case "ribbon-3d":
-          var b = text.bounds;
+          b = text.bounds;
           var fontsize = params['font-size'];
           var leading = params['leading'];
           var yoffset = leading / 4;
@@ -256,7 +257,7 @@ export class TextTool extends MapTool {
           right.sendToBack();
           break;
         case "rectangle":
-          var b = new paper.Path.Rectangle(text.bounds);
+          b = new paper.Path.Rectangle(text.bounds);
           b.scale(1.2);
           b.style = { fillColor: "#fff" };
           b.data.trueY = 79900;
@@ -265,7 +266,7 @@ export class TextTool extends MapTool {
           b.sendToBack();
           break;
         case "rectangle-border":
-          var b = new paper.Path.Rectangle(text.bounds);
+          b = new paper.Path.Rectangle(text.bounds);
           b.scale(1.2);
           b.style = { strokeWidth: 2, strokeColor: "#5d4640", fillColor: "#fff" };
           b.data.trueY = 79900;

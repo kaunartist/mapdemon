@@ -28,14 +28,14 @@ class MapTool extends Component {
   updateToolParameter(data) {
     let params = this.state.params;
     if ("type" in data) {
-      if (data.type == "change") {
+      if (data.type === "change") {
         params[$(data.target).attr('name')] = $(data.target).val();
       }
 
     } else {
       if (data.from) {
         let paramType = this.toType(params[data.input[0].name]);
-        if (paramType == "object") {
+        if (paramType === "object") {
           if ("min" in params[data.input[0].name]) {
             let new_min = data.from;
             let new_max = data.to;
@@ -51,7 +51,7 @@ class MapTool extends Component {
         params[data.name] = data.value;
       }
       // TODO: update SliderDemon preview images aka turn this into a Component
-      // TODO: updtae cursor preview
+      // TODO: update cursor preview
 
       //this.updateCursor(currentTool);
     }
@@ -65,7 +65,7 @@ class MapTool extends Component {
       // update ionSliders/selects that changed with the preset change
       let paramInput = $('#' + this.state.toolname + '-' + params[i]['name']);
       let paramType = this.toType(params[i].value);
-      if (paramType == "object") {
+      if (paramType === "object") {
         paramInput.data('ionRangeSlider').update({
           'from': params[i]['value']['min'],
           'to': params[i]['value']['max']

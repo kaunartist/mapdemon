@@ -157,15 +157,15 @@ export class RoadTool extends MapTool {
   }
 
   useTool(e) {
-    if (e.type == "mousedown") {
+    if (e.type === "mousedown") {
       return this.handleMouseDown(e);
     }
 
-    if (e.type == "mousemove") {
+    if (e.type === "mousemove") {
       return this.handleMouseMove(e);
     }
 
-    if (e.type == "mouseup") {
+    if (e.type === "mouseup") {
       return this.handleMouseUp(e);
     }
 

@@ -33,11 +33,11 @@ export class EraserTool extends MapTool {
   updateToolParameter(data) {
     let params = this.state.params;
     if ("type" in data) {
-      if (data.type == "change") {
-        if (data.currentTarget.name == "filter[]") {
+      if (data.type === "change") {
+        if (data.currentTarget.name === "filter[]") {
           let filtered = params['filter'].slice();
           let i = filtered.indexOf($(data.currentTarget).val());
-          if (i == -1) {
+          if (i === -1) {
             if (data.currentTarget.checked) {
               filtered.push($(data.currentTarget).val());
             }
@@ -54,7 +54,7 @@ export class EraserTool extends MapTool {
     } else {
       if (data.from) {
         let paramType = this.toType(params[data.input[0].name]);
-        if (paramType == "object") {
+        if (paramType === "object") {
           if ("min" in params[data.input[0].name]) {
             let new_min = data.from;
             let new_max = data.to;
@@ -70,7 +70,7 @@ export class EraserTool extends MapTool {
         params[data.name] = data.value;
       }
       // TODO: update SliderDemon preview images aka turn this into a Component
-      // TODO: updtae cursor preview
+      // TODO: update cursor preview
     }
     this.props.updateCursor('eraser-tool', params);
   }
@@ -124,9 +124,9 @@ export class EraserTool extends MapTool {
     if (size > 1) {
       let overlap = params['overlap'];
       let options = {};
-      if (overlap == "contain") {
+      if (overlap === "contain") {
         options = {inside: cursorPreview.bounds};
-      } else if (overlap == "overlap") {
+      } else if (overlap === "overlap") {
         options = {overlapping: cursorPreview.bounds};
       }
       let overlaps = this.props.getItems(options);
@@ -159,7 +159,7 @@ export class EraserTool extends MapTool {
 
       if (newTarget && filter.includes(newTarget.data.type)) {
         if (eraserTarget) {
-          if (eraserTarget != newTarget) {
+          if (eraserTarget !== newTarget) {
             //toolPreview.remove();
             eraserTarget = newTarget;
             eraserTarget.selected = true;
@@ -205,7 +205,7 @@ export class EraserTool extends MapTool {
     } else {
       if (eraserTarget) {
         let newTarget = this.props.hitTestTerrain(targetPoint);
-        if (eraserTarget == newTarget) {
+        if (eraserTarget === newTarget) {
           //erased.push(eraserTarget.remove());
           newTarget.parent.removeChildren(newTarget.index, newTarget.index+1);
           eraserTarget = null;
@@ -218,11 +218,11 @@ export class EraserTool extends MapTool {
 
   useTool(e) {
 
-    if (e.type == "mousemove") {
+    if (e.type === "mousemove") {
       return this.handleMouseMove(e);
     }
 
-    if (e.type == "mouseup") {
+    if (e.type === "mouseup") {
       return this.handleMouseUp(e);
     }
 
@@ -255,13 +255,13 @@ export class EraserTool extends MapTool {
         let p = item.parent;
         let done = false;
         while (!done) {
-          if (p.data.type == "icon-instance" || p.data.type == "terrain") {
+          if (p.data.type === "icon-instance" || p.data.type === "terrain") {
             done = true;
             break;
           }
           p = p.parent;
         }
-        if (p.data.type == "icon-instance") {
+        if (p.data.type === "icon-instance") {
           item.data.type = "icon-child";
           item.data.icon = p;
           return p;

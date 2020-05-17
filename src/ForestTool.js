@@ -210,15 +210,15 @@ export class ForestTool extends MapTool {
   }
 
   useTool(e) {
-    if (e.type == "mousedown") {
+    if (e.type === "mousedown") {
       return this.handleMouseDown(e);
     }
 
-    if (e.type == "mousemove") {
+    if (e.type === "mousemove") {
       return this.handleMouseMove(e);
     }
 
-    if (e.type == "mouseup") {
+    if (e.type === "mouseup") {
       return this.handleMouseUp(e);
     }
 
@@ -240,7 +240,7 @@ export class ForestTool extends MapTool {
     if (startleft.y < startright.y) {
       start = startleft;
     } else {
-      if (startleft.y == startright.y) {
+      if (startleft.y === startright.y) {
         if (startleft.x < startright.x) {
           start = startleft;
         } else {
@@ -266,7 +266,7 @@ export class ForestTool extends MapTool {
 
     // Draw all the other trees following from that
     while (!done) {
-      if (crownShape == "coniferous") {
+      if (crownShape === "coniferous") {
         mx = xOffset + lastTree.children[1].bounds.width/1.5;
       } else {
         mx = xOffset + lastTree.children[1].bounds.width - 1;
@@ -281,7 +281,7 @@ export class ForestTool extends MapTool {
         let target = new paper.Point(mx, my);
         if (mx > rightedge.x) {
           // go to next row
-          if (crownShape == "coniferous") {
+          if (crownShape === "coniferous") {
             yOffset = my + lastTree.children[1].bounds.height/1.4;
           } else {
             yOffset = my + lastTree.children[1].bounds.height/1.2;
@@ -331,14 +331,14 @@ export class ForestTool extends MapTool {
 
     let params = this.state.params;
     let paper = this.props.paper;
-    let scalingAmount = s == -1 ? Math.random() * (0.50) + 0.25 : s;
+    let scalingAmount = s === -1 ? Math.random() * (0.50) + 0.25 : s;
     let leftBase = new paper.Point(0, 0);
     let trunkHeight = Math.random() * (params['trunk-height']['max'] - params['trunk-height']['min']) + params['trunk-height']['min'];
     trunkHeight = trunkHeight * scalingAmount;
     let trunkWidth = Math.random() * (params['trunk-width']['max'] - params['trunk-width']['min']) + params['trunk-width']['min'];
     let tmax = parseInt(params['trunk-width']['max']);
     let tmin = parseInt(params['trunk-width']['min']);
-    if (tmax == tmin == 1) {
+    if (tmax === tmin === 1) {
       trunkWidth = parseInt(params['trunk-width']['min']);
     }
     let crownHeight = Math.random() * (params['crown-height']['max'] - params['crown-height']['min']) + params['crown-height']['min'];
@@ -358,7 +358,7 @@ export class ForestTool extends MapTool {
     let trunk = new paper.Path();
     trunk.add(new paper.Point(leftBase.x, leftBase.y - trunkHeight));
     trunk.add(leftBase);
-    if (trunkWidth != 1) {
+    if (trunkWidth !== 1) {
       trunkWidth = trunkWidth * scalingAmount;
       trunk.add(new paper.Point(leftBase.x + trunkWidth, leftBase.y ));
       trunk.add(new paper.Point(leftBase.x + trunkWidth, leftBase.y - trunkHeight));
@@ -367,10 +367,10 @@ export class ForestTool extends MapTool {
     trunk.data = {'type': 'trunk'};
 
     let crown;
-    if (crownShape == "coniferous") {
+    if (crownShape === "coniferous") {
       crown = new paper.Path.RegularPolygon(new paper.Point(trunkWidth/2, -crownWidth/2 -trunkHeight + 3), 3, crownWidth/2);  
       crown.smooth({ type: 'catmull-rom', factor: 0.5});
-    } else if (crownShape == "deciduous") {
+    } else if (crownShape === "deciduous") {
       crown  = new paper.Path.Ellipse(new paper.Rectangle(0,0,crownWidth, crownHeight));
       crown.translate(new paper.Point(-width/2 + trunkWidth/2, -trunkHeight - crownHeight + 1));
     } else {

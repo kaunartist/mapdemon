@@ -33,7 +33,7 @@ export class MoveTool extends MapTool {
     let params = this.state.params;
     let filtered = params['filter'].slice();
     let i = filtered.indexOf($(data.currentTarget).val());
-    if (i == -1) {
+    if (i === -1) {
       if (data.currentTarget.checked) {
         filtered.push($(data.currentTarget).val());
       }
@@ -80,11 +80,11 @@ export class MoveTool extends MapTool {
       let itemInMotion;
       let itemType = hits[0].item.data.type;
       let parentType = hits[0].item.parent.data.type;
-      if (parentType == "coast") {
+      if (parentType === "coast") {
         itemInMotion = hits[0].item.parent;
-      } else if (itemType == "icon-child") {
+      } else if (itemType === "icon-child") {
         itemInMotion = hits[0].item.data.icon; 
-      } else if (itemType == "crown" || itemType == "trunk" || itemType == "label-bg" || itemType == "label-text") {
+      } else if (itemType === "crown" || itemType === "trunk" || itemType === "label-bg" || itemType === "label-text") {
         itemInMotion = hits[0].item.parent;
       } else {
         itemInMotion = hits[0].item;
@@ -116,7 +116,7 @@ export class MoveTool extends MapTool {
 
     if (this.state.itemInMotion) {
       let itemInMotion = this.state.itemInMotion;
-      if (itemInMotion.data.type != "river" && itemInMotion.data.type != "coast" && itemInMotion.data.type != "road" && itemInMotion.data.type != "label" && itemInMotion.data.type != "icon-instance") {
+      if (itemInMotion.data.type !== "river" && itemInMotion.data.type !== "coast" && itemInMotion.data.type !== "road" && itemInMotion.data.type !== "label" && itemInMotion.data.type !== "icon-instance") {
         itemInMotion.data.trueY = itemInMotion.position.y + itemInMotion.data.ogHeight/2;
       }
       this.setState({"itemInMotion": null});
@@ -128,15 +128,15 @@ export class MoveTool extends MapTool {
 
   useTool(e) {
 
-    if (e.type == "mousedown") {
+    if (e.type === "mousedown") {
       return this.handleMouseDown(e);
     }
 
-    if (e.type == "mousemove") {
+    if (e.type === "mousemove") {
       return this.handleMouseMove(e);
     }
 
-    if (e.type == "mouseup") {
+    if (e.type === "mouseup") {
       return this.handleMouseUp(e);
     }
 

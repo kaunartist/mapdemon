@@ -20,44 +20,51 @@ class MapDemonLogo extends Component {
   componentDidMount() {
     let paper = this.props.paperScope;
     paper.setup("logo");
-    this.state.group = new paper.Group();
-    this.state.eye = new MapDemonEye(this.props.x, this.props.y, paper);
-    this.state.outline = new paper.Path();
-    this.state.corner = new paper.Path();
-    this.state.compass = new paper.Path();
-    this.state.outline.style = laserStyle;
-    this.state.outline.fillColor = "#fcfcfc";
-    this.state.outline.add(new paper.Point(10, 0));
-    this.state.outline.add(new paper.Point(0, 10));
-    this.state.outline.add(new paper.Point(0, 50));
-    this.state.outline.add(new paper.Point(50, 50));
-    this.state.outline.add(new paper.Point(50, 0));
-    this.state.outline.add(new paper.Point(10, 0));
-    this.state.outline.add(new paper.Point(10, 10));
-    this.state.outline.add(new paper.Point(0, 10));
-    this.state.corner.style = laserStyle;
-    this.state.corner.fillColor = "#5d4640";
-    this.state.corner.add(new paper.Point(10, 0));
-    this.state.corner.add(new paper.Point(10, 10));
-    this.state.corner.add(new paper.Point(0, 10));
-    this.state.corner.closePath();
-    this.state.compass.style = laserStyle;
-    this.state.compass.strokeColor = "#ff572c";
-    this.state.compass.add(new paper.Point(38, 12));
-    this.state.compass.add(new paper.Point(43, 7));
-    this.state.compass.add(new paper.Point(40, 7));
-    this.state.compass.add(new paper.Point(43, 10));
-    this.state.compass.add(new paper.Point(43, 7));
-    this.state.compass.translate(new paper.Point(3,-3));
-    this.state.compass.pivot = new paper.Point(40.5, 9.5);
+    let group = new paper.Group();
+    let eye = new MapDemonEye(this.props.x, this.props.y, paper);
+    let outline = new paper.Path();
+    outline.style = laserStyle;
+    outline.fillColor = "#fcfcfc";
+    outline.add(new paper.Point(10, 0));
+    outline.add(new paper.Point(0, 10));
+    outline.add(new paper.Point(0, 50));
+    outline.add(new paper.Point(50, 50));
+    outline.add(new paper.Point(50, 0));
+    outline.add(new paper.Point(10, 0));
+    outline.add(new paper.Point(10, 10));
+    outline.add(new paper.Point(0, 10));
+    let corner = new paper.Path();
+    corner.style = laserStyle;
+    corner.fillColor = "#5d4640";
+    corner.add(new paper.Point(10, 0));
+    corner.add(new paper.Point(10, 10));
+    corner.add(new paper.Point(0, 10));
+    corner.closePath();
+    let compass = new paper.Path();
+    compass.style = laserStyle;
+    compass.strokeColor = "#ff572c";
+    compass.add(new paper.Point(38, 12));
+    compass.add(new paper.Point(43, 7));
+    compass.add(new paper.Point(40, 7));
+    compass.add(new paper.Point(43, 10));
+    compass.add(new paper.Point(43, 7));
+    compass.translate(new paper.Point(3,-3));
+    compass.pivot = new paper.Point(40.5, 9.5);
     //currentTool = "mountain-brush";
     //drawMountainRange(this.state.group, 20, 20);
-    this.state.group.addChild(this.state.outline);
-    this.state.group.addChild(this.state.corner);
-    this.state.group.addChild(this.state.compass);
-    this.state.group.position = new paper.Point(this.props.x, this.props.y);
-    this.state.outline.onClick = (e) => this.handleClick(e);
-    this.setState({intervalID: requestAnimationFrame((e) => this.update(e))});
+    group.addChild(outline);
+    group.addChild(corner);
+    group.addChild(compass);
+    group.position = new paper.Point(this.props.x, this.props.y);
+    outline.onClick = (e) => this.handleClick(e);
+    this.setState({
+      eye: eye,
+      compass: compass,
+      outline: outline,
+      corner: corner,
+      group: group,
+      intervalID: requestAnimationFrame((e) => this.update(e))
+    });
     requestAnimationFrame((e) => this.state.eye.update(e));
     document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
   }
